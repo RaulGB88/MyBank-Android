@@ -2,32 +2,79 @@ package com.practicas.pmdm.mybank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.practicas.pmdm.mybank.adapter.CuentasArrayAdapter;
 import com.practicas.pmdm.mybank.bd.MiBD;
 import com.practicas.pmdm.mybank.bd.MiBancoOperacional;
+import com.practicas.pmdm.mybank.dao.ClienteDAO;
+import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    ClienteDAO clienteDAO = new ClienteDAO();
+    CuentaDAO cuentaDAO = new CuentaDAO();
+    ListView lvCuentas;
+    List<Cuenta> cuentasList;
+    CuentasArrayAdapter cuentasArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cargarDatos();
+
+        mostrarCuentasCliente();
+    }
+
+    public void cargarDatos() {
+
+        MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
+        List<Cliente> cliente = clienteDAO.getAll();
+    }
+
+    public void mostrarCuentasCliente() {
+        Cliente cliente = new Cliente();
+        cliente.setId(1);
+
+        cliente = (Cliente) clienteDAO.search(cliente);
+
+        // Get list for layout.
+        lvCuentas = findViewById(R.id.lvListCuentas);
+        // Get Data.
+        cuentasList = cuentaDAO.getCuentas(cliente);
+        // Init Adapter.
+        cuentasArrayAdapter = new CuentasArrayAdapter(this, cuentasList.size(), cuentasList);
+        // Set Adapter to List.
+        lvCuentas.setAdapter(cuentasArrayAdapter);
+
+        Intent i=new Intent(this, ListCuentasActivity.class);
+        // i.putStringArrayListExtra("", cuentasList);
+        startActivity(i);
+    }
+
+    /*
+    public void showMyBank() {
+
         MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
 
-        TextView txtdatos=(TextView)findViewById(R.id.textView1);
+        TextView txtdatos = (TextView) findViewById(R.id.textView1);
 
         // Introducimos los datos como si fuera la pantalla inicial
         Log.e(this.getComponentName().getClassName(), "Creando el cliente a");
@@ -40,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtdatos.append("Datos del cliente logueado\n");
         txtdatos.append("-----------------------------------------\n");
-        txtdatos.append(a.toString()+"\n");
+        txtdatos.append(a.toString() + "\n");
         txtdatos.append("\n");
 
         // Cambiamos la password
@@ -64,10 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
         b = mbo.login(b);
 
-        if(b==null){
+        if (b == null) {
             txtdatos.append("No ha podido loguearse con 1234 como password.\n");
             txtdatos.append("\n");
-        }else{
+        } else {
             txtdatos.append("Error: Ha podidod loguearse con la password anterior. Es necesario revisar el código.\n");
             txtdatos.append("\n");
         }
@@ -102,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         txtdatos.append("------------------------------------------------------------------------------\n");
         ArrayList<Cuenta> listaCuentas = mbo.getCuentas(a);
 
-        for(int i=0;i<listaCuentas.size();i++){
+        for (int i = 0; i < listaCuentas.size(); i++) {
             txtdatos.append("\n" + listaCuentas.get(i).toString() + "\n");
         }
         txtdatos.append("\n");
@@ -111,15 +158,16 @@ public class MainActivity extends AppCompatActivity {
         txtdatos.append("----------------------------------------------------------------------------------------------------\n");
         ArrayList<Movimiento> listaMovimientos = mbo.getMovimientos(listaCuentas.get(0));
 
-        for(int i=0;i<listaMovimientos.size();i++){
+        for (int i = 0; i < listaMovimientos.size(); i++) {
             txtdatos.append("\n" + listaMovimientos.get(i).toString() + "\n");
         }
         txtdatos.append("Probamos una cuenta que no exista.\n");
         txtdatos.append("----------------------------------------------------------------------------------------------------\n");
 
-        Cuenta cuenta  =listaCuentas.get(0);
+        Cuenta cuenta = listaCuentas.get(0);
         cuenta.setId(11111);
         cuenta.setBanco(null);
-        cuenta = (Cuenta) MiBD.getInstance(this).getCuentaDAO().search((Cuenta)cuenta);
+        cuenta = (Cuenta) MiBD.getInstance(this).getCuentaDAO().search((Cuenta) cuenta);
     }
+    */
 }
