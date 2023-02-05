@@ -13,12 +13,11 @@
         android:theme="@style/Theme.MyBank"
         tools:targetApi="31">
         <activity
-            android:name=".ListCuentasActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:name=".LogedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

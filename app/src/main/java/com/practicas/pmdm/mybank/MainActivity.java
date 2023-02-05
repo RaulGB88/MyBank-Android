@@ -6,74 +6,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.practicas.pmdm.mybank.adapter.CuentasArrayAdapter;
 import com.practicas.pmdm.mybank.bd.MiBD;
 import com.practicas.pmdm.mybank.bd.MiBancoOperacional;
-import com.practicas.pmdm.mybank.dao.ClienteDAO;
-import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    ClienteDAO clienteDAO = new ClienteDAO();
-    CuentaDAO cuentaDAO = new CuentaDAO();
-    ListView lvCuentas;
-    List<Cuenta> cuentasList;
-    CuentasArrayAdapter cuentasArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cargarDatos();
+        // Clean
+        TextView txtdatos = (TextView) findViewById(R.id.textView1);
+        txtdatos.append("");
 
-        mostrarCuentasCliente();
-    }
-
-    public void cargarDatos() {
-
+        // Charge BD.
         MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
-        List<Cliente> cliente = clienteDAO.getAll();
     }
 
-    public void mostrarCuentasCliente() {
-        Cliente cliente = new Cliente();
-        cliente.setId(1);
+    public void goLogin(View view) {
 
-        cliente = (Cliente) clienteDAO.search(cliente);
+        //Button page = (Button) view.findViewById(R.id.btnLogin);
 
-        // Get list for layout.
-        lvCuentas = findViewById(R.id.lvListCuentas);
-        // Get Data.
-        cuentasList = cuentaDAO.getCuentas(cliente);
-        // Init Adapter.
-        cuentasArrayAdapter = new CuentasArrayAdapter(this, cuentasList.size(), cuentasList);
-        // Set Adapter to List.
-        lvCuentas.setAdapter(cuentasArrayAdapter);
-
-        Intent i=new Intent(this, ListCuentasActivity.class);
-        // i.putStringArrayListExtra("", cuentasList);
-        startActivity(i);
+        Intent pageReturned = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(pageReturned);
     }
 
-    /*
-    public void showMyBank() {
-
+    public void chargeAll() {
         MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
-
         TextView txtdatos = (TextView) findViewById(R.id.textView1);
 
         // Introducimos los datos como si fuera la pantalla inicial
@@ -169,5 +142,5 @@ public class MainActivity extends AppCompatActivity {
         cuenta.setBanco(null);
         cuenta = (Cuenta) MiBD.getInstance(this).getCuentaDAO().search((Cuenta) cuenta);
     }
-    */
+
 }
