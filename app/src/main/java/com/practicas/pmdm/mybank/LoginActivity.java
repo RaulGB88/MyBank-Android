@@ -1,6 +1,5 @@
 package com.practicas.pmdm.mybank;
 
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,9 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.practicas.pmdm.mybank.bd.MiBancoOperacional;
 import com.practicas.pmdm.mybank.dao.ClienteDAO;
+import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;
+import com.practicas.pmdm.mybank.pojo.Cuenta;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,12 @@ public class LoginActivity extends AppCompatActivity {
             if (cliente.getNif().equalsIgnoreCase(c.getNif()) && cliente.getClaveSeguridad().equalsIgnoreCase(c.getClaveSeguridad())) {
                 pageReturned = new Intent(LoginActivity.this, LogedActivity.class);
                 clientChecked = true;
-                startActivity(pageReturned);
+
+                // Pasamos el usuario logeqado al siguiente Activity (LogedActivity)
+                Intent intent = new Intent(getApplicationContext(), LogedActivity.class);
+                intent.putExtra("user", c);
+                startActivity(intent);
+
             }
         }
 

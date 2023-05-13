@@ -7,12 +7,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.practicas.pmdm.mybank.dao.CuentaDAO;
+import com.practicas.pmdm.mybank.pojo.Cliente;
+import com.practicas.pmdm.mybank.pojo.Cuenta;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class LogedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loged);
+
+        Cliente cliente = (Cliente) getIntent().getSerializableExtra("user");
+
+        TextView tvUser = (TextView) findViewById(R.id.etUser);
+        tvUser.setText(cliente.getNombre() + " " + cliente.getApellidos());
+
+        CuentaDAO cuentaDAO = new CuentaDAO();
+        ArrayList<Cuenta> listCuenta = cuentaDAO.getCuentas(cliente);
+        //startActivity(pageReturned);
     }
 
     public void goHome(View view) {
@@ -20,8 +37,8 @@ public class LogedActivity extends AppCompatActivity {
         Intent pageReturned = new Intent(LogedActivity.this, MainActivity.class);
         startActivity(pageReturned);
     }
-/*
-    private void init() {
+
+    /*private void init() {
         // Get list for layout.
         lvMenu = findViewById(R.id.lvList);
         // Get Data.
@@ -39,6 +56,6 @@ public class LogedActivity extends AppCompatActivity {
 
         txtUserDNI = (TextView) findViewById(R.id.txtUserDNI);
         txtUserDNI.setText(dni);
-    }
-     */
+    }*/
+
 }
