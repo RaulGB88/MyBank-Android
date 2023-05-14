@@ -13,7 +13,7 @@ public class Cuenta implements Serializable {
     private String sucursal;
     private String dc;
     private String numeroCuenta;
-    private float saldoActual;
+    private Float saldoActual;
     private Cliente cliente;
     private ArrayList<Movimiento> listaMovimientos;
 
