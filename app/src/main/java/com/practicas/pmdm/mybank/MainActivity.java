@@ -2,13 +2,17 @@ package com.practicas.pmdm.mybank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.practicas.pmdm.mybank.bd.MiBD;
 import com.practicas.pmdm.mybank.bd.MiBancoOperacional;
@@ -25,9 +29,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
+        // Clean
+        TextView txtdatos = (TextView) findViewById(R.id.textView1);
+        txtdatos.append("");
 
-        TextView txtdatos=(TextView)findViewById(R.id.textView1);
+        // Charge BD.
+        MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
+    }
+
+    public void goLogin(View view) {
+
+        //Button page = (Button) view.findViewById(R.id.btnLogin);
+
+        Intent pageReturned = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(pageReturned);
+    }
+
+    public void chargeAll() {
+        MiBancoOperacional mbo = MiBancoOperacional.getInstance(this);
+        TextView txtdatos = (TextView) findViewById(R.id.textView1);
 
         // Introducimos los datos como si fuera la pantalla inicial
         Log.e(this.getComponentName().getClassName(), "Creando el cliente a");
@@ -40,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtdatos.append("Datos del cliente logueado\n");
         txtdatos.append("-----------------------------------------\n");
-        txtdatos.append(a.toString()+"\n");
+        txtdatos.append(a.toString() + "\n");
         txtdatos.append("\n");
 
         // Cambiamos la password
@@ -64,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
         b = mbo.login(b);
 
-        if(b==null){
+        if (b == null) {
             txtdatos.append("No ha podido loguearse con 1234 como password.\n");
             txtdatos.append("\n");
-        }else{
+        } else {
             txtdatos.append("Error: Ha podidod loguearse con la password anterior. Es necesario revisar el código.\n");
             txtdatos.append("\n");
         }
@@ -102,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         txtdatos.append("------------------------------------------------------------------------------\n");
         ArrayList<Cuenta> listaCuentas = mbo.getCuentas(a);
 
-        for(int i=0;i<listaCuentas.size();i++){
+        for (int i = 0; i < listaCuentas.size(); i++) {
             txtdatos.append("\n" + listaCuentas.get(i).toString() + "\n");
         }
         txtdatos.append("\n");
@@ -111,15 +131,16 @@ public class MainActivity extends AppCompatActivity {
         txtdatos.append("----------------------------------------------------------------------------------------------------\n");
         ArrayList<Movimiento> listaMovimientos = mbo.getMovimientos(listaCuentas.get(0));
 
-        for(int i=0;i<listaMovimientos.size();i++){
+        for (int i = 0; i < listaMovimientos.size(); i++) {
             txtdatos.append("\n" + listaMovimientos.get(i).toString() + "\n");
         }
         txtdatos.append("Probamos una cuenta que no exista.\n");
         txtdatos.append("----------------------------------------------------------------------------------------------------\n");
 
-        Cuenta cuenta  =listaCuentas.get(0);
+        Cuenta cuenta = listaCuentas.get(0);
         cuenta.setId(11111);
         cuenta.setBanco(null);
-        cuenta = (Cuenta) MiBD.getInstance(this).getCuentaDAO().search((Cuenta)cuenta);
+        cuenta = (Cuenta) MiBD.getInstance(this).getCuentaDAO().search((Cuenta) cuenta);
     }
+
 }
