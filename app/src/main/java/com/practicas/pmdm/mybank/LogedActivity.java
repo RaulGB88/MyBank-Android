@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,12 +34,16 @@ public class LogedActivity extends AppCompatActivity {
         TextView tvUser = (TextView) findViewById(R.id.etUser);
         tvUser.setText(cliente.getNombre() + " " + cliente.getApellidos());
 
+        // 1. Get list from Dao (Dao List).
         ArrayList<Cuenta> listCuenta = cuentaDAO.getCuentas(cliente);
+        // 2. Instance Adapter and put list into it (adapter(list)).
         cuentaArrayAdapter = new CuentaArrayAdapter(this, listCuenta);
-
+        // 3. Get list component from the listview (findViewById - list).
         lvMenu = findViewById(R.id.lvList);
+        // 4. Set Adapter(Rows) into list component (setAdapter).
         lvMenu.setAdapter(cuentaArrayAdapter);
 
+        // 5. Call the view if it's different than the actual view (return View).
         //startActivity(pageReturned);
     }
 
