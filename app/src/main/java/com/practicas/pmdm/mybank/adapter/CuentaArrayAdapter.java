@@ -37,19 +37,19 @@ public class CuentaArrayAdapter extends ArrayAdapter<Cuenta> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Obteniendo una instancia del inflater
+        // 1. Get the instance from inflater (LayoutInflater).
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //Salvando la referencia del View de la fila
+        // 2. Save the reference from View the row (View).
         View listItemView = convertView;
 
-        //Comprobando si el View no existe
+        // 3. Search, check (if exist) and get the view-rows in the project (LayaoutInflater.inflate)
         if (null == convertView) {
             listItemView = inflater.inflate(R.layout.list_row_cuenta, parent, false);
         }
 
-        // Get TextView rows / atributtes
+        // 4. Get TextView rows / atributtes (Cast to TextView).
         TextView tvBanco = (TextView) listItemView.findViewById(R.id.tvBanco);
         TextView tvSucursal = (TextView) listItemView.findViewById(R.id.tvSucursal);
         TextView tvDc = (TextView) listItemView.findViewById(R.id.tvDc);
@@ -57,16 +57,17 @@ public class CuentaArrayAdapter extends ArrayAdapter<Cuenta> {
         TextView tvSaldo = (TextView) listItemView.findViewById(R.id.tvSaldo);
         // ImageView image = (ImageView) listItemView.findViewById(R.id.tvSaldo);
 
-        //Obteniendo instancia de la Tarea en la posición actual
+        // 5. Get the instance form item (object) at the actual position (getItem).
         Cuenta cuenta = (Cuenta) getItem(position);
 
-        // Set the object atributtes to TextView.
+        // 6. Set the object atributtes to TextView (Set toi TextView).
         tvBanco.setText(cuenta.getBanco());
         tvSucursal.setText(cuenta.getSucursal());
         tvDc.setText(cuenta.getDc());
         tvNumeroCuenta.setText(cuenta.getNumeroCuenta());
         tvSaldo.setText(String.valueOf(cuenta.getSaldoActual()));
 
+        // 7. Return the listview (return Adapter-Rows).
         return listItemView;
     }
 
