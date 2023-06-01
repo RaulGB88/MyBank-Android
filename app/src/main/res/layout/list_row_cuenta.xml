@@ -48,4 +48,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNumeroCuenta"
         app:layout_constraintStart_toEndOf="@id/tvBanco" />
 
+    <Button
+        android:id="@+id/btnMovements"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:onClick="goMovements"
+        android:text="@string/listMovements"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvSaldo"
+        app:layout_constraintTop_toBottomOf="@id/tvBanco" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

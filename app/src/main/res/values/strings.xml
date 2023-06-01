@@ -9,4 +9,5 @@
     <string name="crearCuenta">Crear cuenta</string>
     <string name="olvido">Has olvidado la contraseña?</string>
     <string name="loginIncorrecto">Usuario o contraseña incorrectos</string>
+    <string name="listMovements">Listado de Movimientos</string>
 </resources>

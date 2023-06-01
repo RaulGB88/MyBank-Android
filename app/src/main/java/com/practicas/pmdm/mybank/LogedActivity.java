@@ -2,12 +2,16 @@ package com.practicas.pmdm.mybank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.practicas.pmdm.mybank.adapter.CuentaArrayAdapter;
 import com.practicas.pmdm.mybank.dao.CuentaDAO;
@@ -18,7 +22,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class LogedActivity extends AppCompatActivity {
+public class LogedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     CuentaDAO cuentaDAO = new CuentaDAO();
     CuentaArrayAdapter cuentaArrayAdapter = null;
@@ -42,6 +46,34 @@ public class LogedActivity extends AppCompatActivity {
         lvMenu = findViewById(R.id.lvList);
         // 4. Set Adapter(Rows) into list component (setAdapter).
         lvMenu.setAdapter(cuentaArrayAdapter);
+        /*
+        lvMenu.setOnClickListener(lvMenu.setOnClickListener(this.lvMenu) {
+            /**
+             * Callback method to be invoked when an item in this AdapterView has
+             * been clicked.
+             * <p>
+             * Implementers can call getItemAtPosition(position) if they need
+             * to access the data associated with the selected item.
+             *
+             * @param parent   The AdapterView where the click happened.
+             * @param view     The view within the AdapterView that was clicked (this
+             *                 will be a view provided by the adapter)
+             * @param position The position of the view in the adapter.
+             * @param id       The row id of the item that was clicked.
+             *
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cuenta cuentaClicked = listCuenta.get(position);
+                Intent intent = new Intent(LogedActivity.this, MovementActivity.class);
+                intent.putExtra("id", cuentaClicked.getId());
+                intent.putExtra("banco", cuentaClicked.getBanco());
+                intent.putExtra("sucursal", cuentaClicked.getSucursal());
+                intent.putExtra("dc", cuentaClicked.getDc());
+                intent.putExtra("numeroCuenta", cuentaClicked.getNumeroCuenta());
+                intent.putExtra("saldoActual", cuentaClicked.getSaldoActual());
+                startActivity(intent);
+            }
+        }); */
 
         // 5. Call the view if it's different than the actual view (return View).
         //startActivity(pageReturned);
@@ -53,24 +85,35 @@ public class LogedActivity extends AppCompatActivity {
         startActivity(pageReturned);
     }
 
-    /*private void init() {
-        // Get list for layout.
-        lvMenu = findViewById(R.id.lvList);
-        // Get Data.
-        listInstalacion = instalacionesDao.getPlateList();
-        // Init Adapter.
-        adapter = new InstalacionArrayAdapter<>(this, listInstalacion);
-        // Set Adapter to List.
-        lvMenu.setAdapter(adapter);
+    public void goMovements(View view) {
+
+        Intent pageReturned = new Intent(LogedActivity.this, MovementActivity.class);
+        startActivity(pageReturned);
     }
 
-
-    private void recieveData() {
-        Bundle extras = getIntent().getExtras();
-        String dni = (String) extras.get("dni");
-
-        txtUserDNI = (TextView) findViewById(R.id.txtUserDNI);
-        txtUserDNI.setText(dni);
-    }*/
-
+    /**
+     * Callback method to be invoked when an item in this AdapterView has
+     * been clicked.
+     * <p>
+     * Implementers can call getItemAtPosition(position) if they need
+     * to access the data associated with the selected item.
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that was clicked.
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Cuenta cuentaClicked = cuentaArrayAdapter.getItem(position);
+        Intent intent = new Intent(LogedActivity.this, MovementActivity.class);
+        intent.putExtra("id", cuentaClicked.getId());
+        intent.putExtra("banco", cuentaClicked.getBanco());
+        intent.putExtra("sucursal", cuentaClicked.getSucursal());
+        intent.putExtra("dc", cuentaClicked.getDc());
+        intent.putExtra("numeroCuenta", cuentaClicked.getNumeroCuenta());
+        intent.putExtra("saldoActual", cuentaClicked.getSaldoActual());
+        startActivity(intent);
+    }
 }
