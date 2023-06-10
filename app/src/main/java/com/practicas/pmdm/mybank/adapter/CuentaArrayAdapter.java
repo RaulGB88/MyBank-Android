@@ -15,6 +15,7 @@ import com.practicas.pmdm.mybank.R;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CuentaArrayAdapter extends ArrayAdapter<Cuenta> {
 
@@ -31,7 +32,7 @@ public class CuentaArrayAdapter extends ArrayAdapter<Cuenta> {
         super(context, resource, objects);
     }
 
-    public CuentaArrayAdapter(LogedActivity context, int resource, ArrayList<Cuenta> listCuenta) {
+    public CuentaArrayAdapter(LogedActivity context, int resource, List<Cuenta> listCuenta) {
         super(context, 0, listCuenta);
     }
 

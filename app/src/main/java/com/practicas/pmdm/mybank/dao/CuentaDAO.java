@@ -9,6 +9,7 @@ import com.practicas.pmdm.mybank.pojo.Cliente;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by loren on 08/10/15.
@@ -125,7 +126,7 @@ public class CuentaDAO implements PojoDAO {
         return listaCuentas;
     }
 
-    public ArrayList getCuentas(Cliente cliente) {
+    public List getCuentas(Cliente cliente) {
         ArrayList<Cuenta> listaCuentas = new ArrayList<Cuenta>();
         String condicion = "idcliente=" + String.valueOf(cliente.getId());
         String[] columnas = {

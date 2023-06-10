@@ -1,28 +1,34 @@
 package com.practicas.pmdm.mybank;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.practicas.pmdm.mybank.adapter.AccountAdapter;
 import com.practicas.pmdm.mybank.adapter.CuentaArrayAdapter;
+import com.practicas.pmdm.mybank.adapter.OnItemClickListener;
 import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LogedActivity extends AppCompatActivity
-        implements AdapterView.OnItemClickListener {
+        implements OnItemClickListener {
 
     CuentaDAO cuentaDAO = new CuentaDAO();
-    CuentaArrayAdapter cuentaArrayAdapter = null;
-    ListView lvMenu = null;
+    AccountAdapter accountAdapter = null;
+    RecyclerView rvList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +41,39 @@ public class LogedActivity extends AppCompatActivity
         tvUser.setText(cliente.getNombre() + " " + cliente.getApellidos());
 
         // 1. Get list from Dao (Dao List).
-        ArrayList<Cuenta> listCuenta = cuentaDAO.getCuentas(cliente);
+        List<Cuenta> listCuenta = cuentaDAO.getCuentas(cliente);
+
         // 2. Instance Adapter and put list into it (adapter(list)).
-        cuentaArrayAdapter = new CuentaArrayAdapter(this, 0, listCuenta);
-        // 3. Get list component from the listview (findViewById - list).
-        //lvMenu = findViewById(R.id.lvList);
+        initRecyclerView(listCuenta);
+
+        // 3. Get Recycleriew component from the listview (findViewById - list).
+        //lvList = (RecyclerView) findViewById(R.id.lvList);
+        //lvList.setAdapter(accountAdapter);
+
+        //cuentaArrayAdapter = new CuentaArrayAdapter(this, 0, listCuenta);
+
         // 4. Set Adapter(Rows) into list component (setAdapter).
         //lvMenu.setAdapter(cuentaArrayAdapter);
         // 5. Set event to onclick.
+        /*
         ListView list = (ListView) findViewById(R.id.lvList);
         list.setAdapter(cuentaArrayAdapter);
         list.setClickable(true);
         list.setOnItemClickListener(this);
+        */
 
         // 5. Call the view if it's different than the actual view (return View).
         //startActivity(pageReturned);
+    }
+
+    public void initRecyclerView(List<Cuenta> listcuenta) {
+        // Adapter
+        accountAdapter = new AccountAdapter(listcuenta, this);
+        accountAdapter.setOnItemClickListener(this);
+        // RecyclerView
+        rvList = (RecyclerView) findViewById(R.id.lvList);
+        rvList.setLayoutManager(new LinearLayoutManager(this));
+        rvList.setAdapter(accountAdapter);
     }
 
     public void goHome(View view) {
@@ -64,32 +88,8 @@ public class LogedActivity extends AppCompatActivity
         startActivity(pageReturned);
     }
 
-    /**
-     * Callback method to be invoked when an item in this AdapterView has
-     * been clicked.
-     * <p>
-     * Implementers can call getItemAtPosition(position) if they need
-     * to access the data associated with the selected item.
-     *
-     * @param parent   The AdapterView where the click happened.
-     * @param view     The view within the AdapterView that was clicked (this
-     *                 will be a view provided by the adapter)
-     * @param position The position of the view in the adapter.
-     * @param id       The row id of the item that was clicked.
-     */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Cuenta cuentaClicked = cuentaArrayAdapter.getItem(position);
-        Intent intent = new Intent(LogedActivity.this, MovementActivity.class);
-        intent.putExtra("cuenta", cuentaClicked);
-        /*
-        intent.putExtra("id", cuentaClicked.getId());
-        intent.putExtra("banco", cuentaClicked.getBanco());
-        intent.putExtra("sucursal", cuentaClicked.getSucursal());
-        intent.putExtra("dc", cuentaClicked.getDc());
-        intent.putExtra("numeroCuenta", cuentaClicked.getNumeroCuenta());
-        intent.putExtra("saldoActual", cuentaClicked.getSaldoActual());
-        */
-        startActivity(intent);
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, String.valueOf(position), Toast.LENGTH_SHORT).show();
     }
 }

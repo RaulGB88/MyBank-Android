@@ -21,6 +21,7 @@ import com.practicas.pmdm.mybank.pojo.Cuenta;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         txtdatos.append("Obtenemos la lista de cuentas del cliente logueado.\n");
         txtdatos.append("------------------------------------------------------------------------------\n");
-        ArrayList<Cuenta> listaCuentas = mbo.getCuentas(a);
+        List<Cuenta> listaCuentas = mbo.getCuentas(a);
 
         for (int i = 0; i < listaCuentas.size(); i++) {
             txtdatos.append("\n" + listaCuentas.get(i).toString() + "\n");
