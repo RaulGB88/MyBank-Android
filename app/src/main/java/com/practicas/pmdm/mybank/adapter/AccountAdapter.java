@@ -45,8 +45,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //listener.onItemClick(this, position);
-                Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                listener.onItemClick(v, position);
+                //Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
