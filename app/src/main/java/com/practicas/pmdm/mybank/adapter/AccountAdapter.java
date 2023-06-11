@@ -23,10 +23,11 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
     LayoutInflater inflater;
     Context context;
 
-    public AccountAdapter(List<Cuenta> listData, Context context) {
+    public AccountAdapter(List<Cuenta> listData, Context context, OnItemClickListener onItemClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.listData = listData;
+        this.setOnItemClickListener(onItemClickListener);
     }
 
     @NonNull

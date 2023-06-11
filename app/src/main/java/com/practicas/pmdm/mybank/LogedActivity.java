@@ -68,8 +68,8 @@ public class LogedActivity extends AppCompatActivity
 
     public void initRecyclerView(List<Cuenta> listcuenta) {
         // Adapter
-        accountAdapter = new AccountAdapter(listcuenta, this);
-        accountAdapter.setOnItemClickListener(this);
+        accountAdapter = new AccountAdapter(listcuenta, this, this);
+        //accountAdapter.setOnItemClickListener(this);
         // RecyclerView
         rvList = (RecyclerView) findViewById(R.id.lvList);
         rvList.setLayoutManager(new LinearLayoutManager(this));
