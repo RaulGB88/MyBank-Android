@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,13 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AccountViewHolder holder, int position) {
         holder.render(listData.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //listener.onItemClick(this, position);
+                Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

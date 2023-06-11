@@ -30,13 +30,13 @@ public class AccountViewHolder extends RecyclerView.ViewHolder {
         tvNumeroCuenta = (TextView) itemView.findViewById(R.id.tvNumeroCuenta);
         tvSaldo = (TextView) itemView.findViewById(R.id.tvSaldo);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
+        /* itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 listener.onItemClick(view, getAdapterPosition());
             }
-        });
+        }); */
     }
 
     public void render(Cuenta account) {
