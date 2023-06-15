@@ -19,22 +19,23 @@ public class MovementActivity extends AppCompatActivity {
 
     ListView lvMenu = null;
 
+    ArrayList<Movimiento> listMovement;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movement);
 
-        Cuenta cuenta = (Cuenta) getIntent().getSerializableExtra("cuenta");
+        Cuenta account = (Cuenta) getIntent().getSerializableExtra("account");
 
         // 1. Get list from Dao (Dao List).
-        ArrayList<Movimiento> listMovement = movimientoDAO.getMovimientos(cuenta);
+        listMovement = movimientoDAO.getMovimientos(account);
         // 2. Instance Adapter and put list into it (adapter(list)).
         movementArrayAdapter = new MovementArrayAdapter(this, 0, listMovement);
         // 3. Get list component from the listview (findViewById - list).
-        lvMenu = findViewById(R.id.lvList);
+        lvMenu = findViewById(R.id.lvList2);
         // 4. Set Adapter(Rows) into list component (setAdapter).
         lvMenu.setAdapter(movementArrayAdapter);
-        lvMenu.setOnClickListener((View.OnClickListener) this);
     }
 
 }

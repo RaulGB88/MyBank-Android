@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class LogedActivity extends AppCompatActivity
     CuentaDAO cuentaDAO = new CuentaDAO();
     AccountAdapter accountAdapter = null;
     RecyclerView rvList = null;
+    List<Cuenta> listCuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class LogedActivity extends AppCompatActivity
         tvUser.setText(cliente.getNombre() + " " + cliente.getApellidos());
 
         // 1. Get list from Dao (Dao List).
-        List<Cuenta> listCuenta = cuentaDAO.getCuentas(cliente);
+        listCuenta = cuentaDAO.getCuentas(cliente);
 
         // 2. Instance Adapter and put list into it (adapter(list)).
         initRecyclerView(listCuenta);
@@ -91,5 +93,11 @@ public class LogedActivity extends AppCompatActivity
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+        Cuenta accountClicked = listCuenta.get(position);
+
+        Intent intent = new Intent(LogedActivity.this, MovementActivity.class);
+        intent.putExtra("account", accountClicked);
+        startActivity(intent);
     }
+
 }
