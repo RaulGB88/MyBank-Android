@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,31 +16,40 @@ import java.util.List;
 
 public class MovementAdapter extends RecyclerView.Adapter<MovementViewHolder> {
 
-    private List<Movimiento> listMovement;
+    private OnItemClickListener listener;
+    private List<Movimiento> listData;
     private LayoutInflater inflater;
     private Context context;
 
-    public MovementAdapter(List<Movimiento> listMovement, Context context) {
+    public MovementAdapter(List<Movimiento> listData, Context context, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
-        this.listMovement = listMovement;
+        this.listData = listData;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public MovementViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        inflater = LayoutInflater.from(parent.getContext());
         View listItemView = inflater.inflate(R.layout.list_row_movement, parent, false);
         return new MovementViewHolder(listItemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovementViewHolder holder, int position) {
-        holder.render(listMovement.get(position));
+        holder.render(listData.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(v, position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return listMovement.size();
+        return listData.size();
     }
 
 }

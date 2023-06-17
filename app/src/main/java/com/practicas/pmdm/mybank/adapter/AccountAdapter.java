@@ -24,18 +24,21 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
     LayoutInflater inflater;
     Context context;
 
-    public AccountAdapter(List<Cuenta> listData, Context context, OnItemClickListener onItemClickListener) {
+    public AccountAdapter(List<Cuenta> listData, Context context, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.listData = listData;
-        this.setOnItemClickListener(onItemClickListener);
+        this.setOnItemClickListener(listener);
     }
 
     @NonNull
     @Override
     public AccountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Init Inflater.
         inflater = LayoutInflater.from(parent.getContext());
+        // Inflate View items.
         View listItemView = inflater.inflate(R.layout.list_row_cuenta, parent, false);
+        // Init ViewHolder with View.
         return new AccountViewHolder(listItemView);
     }
 

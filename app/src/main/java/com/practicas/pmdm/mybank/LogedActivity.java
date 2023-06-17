@@ -4,18 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.practicas.pmdm.mybank.adapter.AccountAdapter;
-import com.practicas.pmdm.mybank.adapter.CuentaArrayAdapter;
 import com.practicas.pmdm.mybank.adapter.OnItemClickListener;
 import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;

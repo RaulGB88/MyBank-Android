@@ -42,7 +42,7 @@ public class MovementArrayAdapter extends ArrayAdapter<Movimiento> {
 
         // 3. Search, check (if exist) and get the view-rows in the project (LayaoutInflater.inflate)
         if (null == convertView) {
-            listItemView = inflater.inflate(R.layout.list_row_cuenta, parent, false);
+            listItemView = inflater.inflate(R.layout.list_row_movement, parent, false);
         }
 
         // 4. Get TextView rows / atributtes (Cast to TextView).

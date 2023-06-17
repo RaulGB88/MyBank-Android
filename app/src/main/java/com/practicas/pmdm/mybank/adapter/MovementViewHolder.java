@@ -19,28 +19,28 @@ public class MovementViewHolder extends RecyclerView.ViewHolder {
     TextView tvNumeroCuentaDestino;
 
     // Constructor
-    public MovementViewHolder(View listItemView) {
+    public MovementViewHolder(View itemView) {
 
-        super(listItemView);
+        super(itemView);
 
         // 4. Get TextView rows / atributtes (Cast to TextView).
-        tvIdMovement = (TextView) listItemView.findViewById(R.id.tvIdMovement);
-        tvtipo = (TextView) listItemView.findViewById(R.id.tvTipo);
-        tvFechaOperacion = (TextView) listItemView.findViewById(R.id.tvFechaOperacion);
-        tvDescripcion = (TextView) listItemView.findViewById(R.id.tvDescripcion);
-        tvImporte = (TextView) listItemView.findViewById(R.id.tvImporte);
-        tvNumeroCuentaOrigen = (TextView) listItemView.findViewById(R.id.tvNumeroCuentaOrigen);
-        tvNumeroCuentaDestino = (TextView) listItemView.findViewById(R.id.tvNumeroCuentaDestino);
+        tvIdMovement = (TextView) itemView.findViewById(R.id.tvIdMovement);
+        tvtipo = (TextView) itemView.findViewById(R.id.tvTipo);
+        tvFechaOperacion = (TextView) itemView.findViewById(R.id.tvFechaOperacion);
+        tvDescripcion = (TextView) itemView.findViewById(R.id.tvDescripcion);
+        tvImporte = (TextView) itemView.findViewById(R.id.tvImporte);
+        tvNumeroCuentaOrigen = (TextView) itemView.findViewById(R.id.tvNumeroCuentaOrigen);
+        tvNumeroCuentaDestino = (TextView) itemView.findViewById(R.id.tvNumeroCuentaDestino);
     }
 
     public void render(Movimiento movement) {
 
         // 6. Set the object atributtes to TextView (Set toi TextView).
         tvIdMovement.setText(movement.getId());
-        tvtipo.setText(movement.getTipo());
-        tvFechaOperacion.setText((CharSequence) movement.getFechaOperacion());
+        tvtipo.setText(String.valueOf(movement.getTipo()));
+        tvFechaOperacion.setText(String.valueOf(movement.getFechaOperacion()));
         tvDescripcion.setText(movement.getDescripcion());
-        tvImporte.setText((int) movement.getImporte());
+        tvImporte.setText(String.valueOf(movement.getImporte()));
         tvNumeroCuentaOrigen.setText(movement.getCuentaOrigen().getNumeroCuenta());
         tvNumeroCuentaDestino.setText(movement.getCuentaDestino().getNumeroCuenta());
     }
