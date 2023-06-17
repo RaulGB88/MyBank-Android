@@ -7,6 +7,7 @@ import com.practicas.pmdm.mybank.pojo.Cuenta;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by loren on 08/10/15.
@@ -61,7 +62,7 @@ public class MiBancoOperacional {
     }
 
     // Operacion getCuentas: Obtiene un ArrayList de las cuentas de un cliente que recibe como parámetro
-    public ArrayList<Cuenta> getCuentas(Cliente c) {
+    public List<Cuenta> getCuentas(Cliente c) {
         return miBD.getCuentaDAO().getCuentas(c);
     }
 

@@ -18,7 +18,7 @@ public class MiBD extends SQLiteOpenHelper {
     //nombre de la base de datos
     private static final String database = "MiBanco";
     //versión de la base de datos
-    private static final int version = 13;
+    private static final int version = 16;
     //Instrucción SQL para crear la tabla de Clientes
     private String sqlCreacionClientes = "CREATE TABLE clientes ( id INTEGER PRIMARY KEY AUTOINCREMENT, nif STRING, nombre STRING, " +
             "apellidos STRING, claveSeguridad STRING, email STRING);";
@@ -111,6 +111,7 @@ public class MiBD extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (2, '22222222B', 'Mortadelo', 'Ibáñez', '1234', 'mortadelo.ibanez@tia.es');");
         db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (3, '33333333C', 'Vicente', 'Mondragón', '1234', 'vicente.mondragon@tia.es');");
         db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (4, '29211661M', 'Raul', 'Granel Blasco', '1234', 'raul.granel@gmail.com');");
+        db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (5, '1', 'Tester', 'GB', '1', 'raul.granel@gmail.com');");
         db.execSQL("INSERT INTO clientes (rowid, id, nif, nombre, apellidos, claveSeguridad, email) VALUES (null, null, '44444444D', 'Ayrton', 'Senna', '1234', 'ayrton.senna@f1.es');");
         db.execSQL("INSERT INTO clientes(rowid, id, nif, nombre, apellidos, claveSeguridad, email)VALUES(null, null, 'B1111111A', 'Ibertrola', '-', '1234', '-');");
         db.execSQL("INSERT INTO clientes (rowid, id, nif, nombre, apellidos, claveSeguridad, email) VALUES (null, null, 'B2222222B', 'Gas Natural', '-', '1234', '-');");
