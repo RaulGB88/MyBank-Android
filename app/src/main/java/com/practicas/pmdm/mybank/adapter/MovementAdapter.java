@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.practicas.pmdm.mybank.R;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
-import java.util.Collections;
 import java.util.List;
 
 public class MovementAdapter extends RecyclerView.Adapter<MovementViewHolder> {
@@ -31,8 +30,11 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementViewHolder> {
     @NonNull
     @Override
     public MovementViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Init Inflater.
         inflater = LayoutInflater.from(parent.getContext());
+        // Inflate View items.
         View listItemView = inflater.inflate(R.layout.list_row_movement, parent, false);
+        // Init ViewHolder with View.
         return new MovementViewHolder(listItemView);
     }
 
@@ -42,7 +44,7 @@ public class MovementAdapter extends RecyclerView.Adapter<MovementViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(v, position);
+                listener.onItemClick(v, holder.getAdapterPosition());
             }
         });
     }

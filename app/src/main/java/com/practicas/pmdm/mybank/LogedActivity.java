@@ -1,14 +1,14 @@
 package com.practicas.pmdm.mybank;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.practicas.pmdm.mybank.adapter.AccountAdapter;
 import com.practicas.pmdm.mybank.adapter.OnItemClickListener;
@@ -16,7 +16,6 @@ import com.practicas.pmdm.mybank.dao.CuentaDAO;
 import com.practicas.pmdm.mybank.pojo.Cliente;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LogedActivity extends AppCompatActivity
@@ -24,7 +23,7 @@ public class LogedActivity extends AppCompatActivity
 
     CuentaDAO cuentaDAO = new CuentaDAO();
     AccountAdapter accountAdapter = null;
-    RecyclerView rvList = null;
+    RecyclerView rvListAccount = null;
     List<Cuenta> listCuenta;
 
     @Override
@@ -44,8 +43,8 @@ public class LogedActivity extends AppCompatActivity
         initRecyclerView(listCuenta);
 
         // 3. Get Recycleriew component from the listview (findViewById - list).
-        //lvList = (RecyclerView) findViewById(R.id.lvList);
-        //lvList.setAdapter(accountAdapter);
+        //rvListAccount = (RecyclerView) findViewById(R.id.rvListAccount);
+        //rvListAccount.setAdapter(accountAdapter);
 
         //cuentaArrayAdapter = new CuentaArrayAdapter(this, 0, listCuenta);
 
@@ -53,7 +52,7 @@ public class LogedActivity extends AppCompatActivity
         //lvMenu.setAdapter(cuentaArrayAdapter);
         // 5. Set event to onclick.
         /*
-        ListView list = (ListView) findViewById(R.id.lvList);
+        ListView list = (ListView) findViewById(R.id.rvListAccount);
         list.setAdapter(cuentaArrayAdapter);
         list.setClickable(true);
         list.setOnItemClickListener(this);
@@ -68,9 +67,9 @@ public class LogedActivity extends AppCompatActivity
         accountAdapter = new AccountAdapter(listcuenta, this, this);
         //accountAdapter.setOnItemClickListener(this);
         // RecyclerView
-        rvList = (RecyclerView) findViewById(R.id.lvList);
-        rvList.setLayoutManager(new LinearLayoutManager(this));
-        rvList.setAdapter(accountAdapter);
+        rvListAccount = (RecyclerView) findViewById(R.id.rvListAccount);
+        rvListAccount.setLayoutManager(new LinearLayoutManager(this));
+        rvListAccount.setAdapter(accountAdapter);
     }
 
     public void goHome(View view) {

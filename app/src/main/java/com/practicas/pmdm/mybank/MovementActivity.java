@@ -1,16 +1,16 @@
 package com.practicas.pmdm.mybank;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.practicas.pmdm.mybank.adapter.AccountAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.practicas.pmdm.mybank.adapter.MovementAdapter;
 import com.practicas.pmdm.mybank.adapter.MovementArrayAdapter;
 import com.practicas.pmdm.mybank.adapter.OnItemClickListener;
@@ -18,7 +18,6 @@ import com.practicas.pmdm.mybank.dao.MovimientoDAO;
 import com.practicas.pmdm.mybank.pojo.Cuenta;
 import com.practicas.pmdm.mybank.pojo.Movimiento;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovementActivity extends AppCompatActivity implements OnItemClickListener {
@@ -28,7 +27,7 @@ public class MovementActivity extends AppCompatActivity implements OnItemClickLi
     MovementAdapter adapter;
 
     ListView lvMenu = null;
-    RecyclerView rvList = null;
+    RecyclerView rvListMovemenet = null;
 
     List<Movimiento> listMovement;
 
@@ -39,6 +38,10 @@ public class MovementActivity extends AppCompatActivity implements OnItemClickLi
 
         Cuenta account = (Cuenta) getIntent().getSerializableExtra("account");
 
+        TextView etAccount = (TextView) findViewById(R.id.etAccount);
+        etAccount.setText("Cuenta: " + account.getNumeroCuenta());
+
+
         // 1. Get list from Dao (Dao List).
         listMovement = movimientoDAO.getMovimientos(account);
         initRecyclerView(listMovement);
@@ -47,7 +50,7 @@ public class MovementActivity extends AppCompatActivity implements OnItemClickLi
 /*        // 2. Instance Adapter and put list into it (adapter(list)).
         movementArrayAdapter = new MovementArrayAdapter(this, 0, listMovement);
         // 3. Get list component from the listview (findViewById - list).
-        lvMenu = findViewById(R.id.rvList2);
+        lvMenu = findViewById(R.id.rvListMovemenet);
         // 4. Set Adapter(Rows) into list component (setAdapter).
         lvMenu.setAdapter(movementArrayAdapter);*/
     }
@@ -57,9 +60,9 @@ public class MovementActivity extends AppCompatActivity implements OnItemClickLi
         adapter = new MovementAdapter(listMovement, this, this);
         //accountAdapter.setOnItemClickListener(this);
         // RecyclerView
-        rvList = (RecyclerView) findViewById(R.id.lvList2);
-        rvList.setLayoutManager(new LinearLayoutManager(this));
-        rvList.setAdapter(adapter);
+        rvListMovemenet = (RecyclerView) findViewById(R.id.rvListMovemenet);
+        rvListMovemenet.setLayoutManager(new LinearLayoutManager(this));
+        rvListMovemenet.setAdapter(adapter);
     }
 
     @Override
@@ -70,6 +73,12 @@ public class MovementActivity extends AppCompatActivity implements OnItemClickLi
         Intent intent = new Intent(MovementActivity.this, MovementActivity.class);
         intent.putExtra("account", movementClicked);
         startActivity(intent);*/
+    }
+
+    public void goHome(View view) {
+
+        Intent pageReturned = new Intent(MovementActivity.this, MainActivity.class);
+        startActivity(pageReturned);
     }
 
 }

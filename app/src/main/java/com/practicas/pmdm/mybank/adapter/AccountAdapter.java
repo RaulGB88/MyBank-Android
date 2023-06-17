@@ -1,12 +1,9 @@
 package com.practicas.pmdm.mybank.adapter;
 
 import android.content.Context;
-import android.icu.text.MessagePattern;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +25,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.listData = listData;
-        this.setOnItemClickListener(listener);
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,7 +45,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(v, position);
+                listener.onItemClick(v, holder.getAdapterPosition());
                 //Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
             }
         });
@@ -57,10 +54,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountViewHolder> {
     @Override
     public int getItemCount() {
         return listData.size();
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClick) {
-        this.listener = onItemClick;
     }
 
 }
