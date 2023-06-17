@@ -36,7 +36,7 @@ public class MovementViewHolder extends RecyclerView.ViewHolder {
     public void render(Movimiento movement) {
 
         // 6. Set the object atributtes to TextView (Set toi TextView).
-        tvIdMovement.setText(movement.getId());
+        tvIdMovement.setText(String.valueOf(movement.getId()));
         tvtipo.setText(String.valueOf(movement.getTipo()));
         tvFechaOperacion.setText(String.valueOf(movement.getFechaOperacion()));
         tvDescripcion.setText(movement.getDescripcion());
