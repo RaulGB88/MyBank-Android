@@ -60,5 +60,4 @@
         app:layout_constraintStart_toStartOf="@id/tvSaldo"
         app:layout_constraintTop_toBottomOf="@id/tvBanco" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
