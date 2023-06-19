@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
             txtLoginWrong.setText(R.string.loginIncorrecto);
             txtLoginWrong.setTextColor(R.color.red);
         }
-
     }
 
 }
