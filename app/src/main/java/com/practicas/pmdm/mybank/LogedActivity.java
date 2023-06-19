@@ -22,7 +22,7 @@ public class LogedActivity extends AppCompatActivity
         implements OnItemClickListener {
 
     CuentaDAO cuentaDAO = new CuentaDAO();
-    AccountAdapter accountAdapter = null;
+    AccountAdapter adapter = null;
     RecyclerView rvListAccount = null;
     List<Cuenta> listCuenta;
 
@@ -44,7 +44,7 @@ public class LogedActivity extends AppCompatActivity
 
         // 3. Get Recycleriew component from the listview (findViewById - list).
         //rvListAccount = (RecyclerView) findViewById(R.id.rvListAccount);
-        //rvListAccount.setAdapter(accountAdapter);
+        //rvListAccount.setAdapter(adapter);
 
         //cuentaArrayAdapter = new CuentaArrayAdapter(this, 0, listCuenta);
 
@@ -62,14 +62,13 @@ public class LogedActivity extends AppCompatActivity
         //startActivity(pageReturned);
     }
 
-    public void initRecyclerView(List<Cuenta> listcuenta) {
+    public void initRecyclerView(List<Cuenta> listData) {
         // Adapter
-        accountAdapter = new AccountAdapter(listcuenta, this, this);
-        //accountAdapter.setOnItemClickListener(this);
+        adapter = new AccountAdapter(listData, this, this);
         // RecyclerView
         rvListAccount = (RecyclerView) findViewById(R.id.rvListAccount);
         rvListAccount.setLayoutManager(new LinearLayoutManager(this));
-        rvListAccount.setAdapter(accountAdapter);
+        rvListAccount.setAdapter(adapter);
     }
 
     public void goHome(View view) {
